@@ -32,7 +32,7 @@ function App() {
         />
 
         <Route
-          path="/createMovies"
+          path="/createMovie"
           element={<CreateMovie />}
         />
 

@@ -2,7 +2,8 @@
   "files": [],
   "compilerOptions": {
     "types": [
-      "node"
+      "node",
+      "vite/client"
     ],
   },
   "references": [

@@ -1,9 +1,10 @@
-import Form from "../../components/Form";
+import MovieForm from "../../components/MovieForm";
+
 
 export default function CreateMovie() {
   return (
     <div className="mt-12">
-      <Form />
+      <MovieForm />
     </div>
   )
 }

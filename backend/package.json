@@ -12,15 +12,14 @@
     "express": "^4.21.2",
     "moment": "^2.29.3",
     "pg": "^8.7.3",
-    "rimraf": "^6.0.1",
-    "tsc": "^2.0.4",
-    "typescript": "^5.8.3"
+    "rimraf": "^6.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "@types/pg": "^8.11.13",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "typescript": "^5.8.3"
   }
 }

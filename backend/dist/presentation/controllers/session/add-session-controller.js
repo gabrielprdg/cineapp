@@ -24,11 +24,15 @@ class AddSessionController {
                     return (0, http_helper_1.badRequest)(error);
                 }
                 const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body;
+                // Converte a string para objeto Date
+                const parsedDate = new Date(date);
+                // Ajusta para o horário local de São Paulo (GMT-3)
+                const localDate = new Date(parsedDate.getTime() + (3 * 60 * 60 * 1000));
                 yield this.addSession.add({
                     movieId,
                     cinemaId,
                     dayOfWeek,
-                    date
+                    date: localDate
                 });
                 return (0, http_helper_1.noContent)();
             }

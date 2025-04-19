@@ -21,11 +21,15 @@ export class AddSessionController implements Controller {
 
       const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body
 
+      const parsedDate = new Date(date)
+
+      const localDate = new Date(parsedDate.getTime() + (3 * 60 * 60 * 1000))
+
       await this.addSession.add({
         movieId,
         cinemaId,
         dayOfWeek,
-        date
+        date: localDate
       })
 
       return noContent()
@@ -34,4 +38,5 @@ export class AddSessionController implements Controller {
       return serverError(err)
     }
   }
+
 }

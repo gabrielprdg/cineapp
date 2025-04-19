@@ -1,7 +1,7 @@
-create table session (
-  id serial primary key,
-  movie_id integer not null references movie(id),
-  cinema_id integer not null references cinema(id),
-  day_of_week varchar(10) not null,
-  date date not null
+CREATE TABLE session (
+  id SERIAL PRIMARY KEY,
+  movie_id INTEGER NOT NULL REFERENCES movie(id),
+  cinema_id INTEGER NOT NULL REFERENCES cinema(id),
+  day_of_week VARCHAR(10) NOT NULL,
+  date TIMESTAMP NOT NULL
 );

@@ -1,47 +1,33 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
+import CinemaTable from "../../components/CinemaTable";
 
 export default function Cinema() {
-  const [status, setStatus] = useState("");
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [cinemas, setCinemas] = useState([]);
   const navigate = useNavigate();
 
-  const handleTaskDelete = (deletedTaskId: string) => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== deletedTaskId));
-  };
-
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchCinemas = async () => {
       try {
-        const token = localStorage.getItem("user-token");
-
-        const response = await api.get(status ? `task/${status}` : "task", {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-        setTasks(response.data);
+        const response = await api.get("/cinemas"); // sem headers
+        setCinemas(response.data);
       } catch (error) {
-        console.error("Erro ao buscar tarefas:", error);
+        console.error("Erro ao buscar cinemas:", error);
       }
     };
 
-    fetchTasks();
-  }, [status]);
+    fetchCinemas();
+  }, []);
 
-  const handleCreateCinema = () => {
-    navigate('/CreateCinema');
-  };
 
-  const handleBackToHome = () => {
-    navigate('/');
-  };
+  const handleCreateCinema = () => navigate('/CreateCinema');
+  const handleBackToHome = () => navigate('/');
 
   return (
     <div className="p-8 pr-12">
-      <div className="flex justify-between items-center">
-        <h1 className="m-12 text-4xl font-semibold text-gray-800">Cinema</h1>
+      <div className="items-top flex justify-between items-center">
+        <h1 className="text-4xl font-semibold text-gray-800">Cinemas</h1>
         <button
           onClick={handleCreateCinema}
           className="mr-12 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
@@ -49,6 +35,8 @@ export default function Cinema() {
           +
         </button>
       </div>
+
+      <CinemaTable cinemas={cinemas} />
     </div>
   );
 }

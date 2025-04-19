@@ -1,9 +1,9 @@
-import Form from "../../components/Form";
+import CinemaForm from "../../components/CinemaForm";
 
 export default function CreateCinema() {
   return (
     <div className="mt-12">
-      <Form />
+      < CinemaForm />
     </div>
   )
 }
