@@ -1,0 +1,30 @@
+import { Controller, HttpRequest, HttpResponse } from '../../protocols'
+import { Validation } from '../../protocols/validation'
+import { badRequest, noContent, serverError } from '../../helpers/http/http-helper'
+import { UpdateSessionById } from '../../../domain/usecases/session/update-session-by-id'
+
+export class UpdateSessionByIdController implements Controller {
+  constructor(
+    private readonly updateSessionById: UpdateSessionById
+  ) { }
+
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+
+
+      const { id } = httpRequest.params
+      const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body
+
+      await this.updateSessionById.update(id, {
+        movieId,
+        cinemaId,
+        dayOfWeek,
+        date
+      })
+
+      return noContent()
+    } catch (err: any) {
+      return serverError(err)
+    }
+  }
+}
