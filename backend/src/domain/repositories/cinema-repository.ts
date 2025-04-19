@@ -12,4 +12,5 @@ export abstract class CinemaRepository {
   abstract deleteById(id: string): Promise<CinemaModel | null>;
   abstract loadAll(): Promise<CinemaModel[]>;
   abstract updateById(cinema: CinemaParams, id: string): Promise<void>;
+  abstract loadById(id: string): Promise<CinemaModel | null>;
 }

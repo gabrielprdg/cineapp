@@ -24,6 +24,19 @@ export class PostgresMovieRepository implements MovieRepository {
     return null;
   }
 
+  async loadById(id: string): Promise<MovieModel | null> {
+    const result = await pgHelper.client.query(
+      'SELECT * FROM movie WHERE id = $1',
+      [id]
+    );
+
+    if (result.rows.length > 0) {
+      return result.rows[0];
+    }
+
+    return null;
+  }
+
   async updateById(data: MovieParams, id: string): Promise<void> {
     const { gender, name, duration, classification, releaseDate, synopsis } = data
     await pgHelper.pool.query(

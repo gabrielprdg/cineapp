@@ -14,4 +14,5 @@ export abstract class MovieRepository {
   abstract deleteById(id: string): Promise<MovieModel | null>;
   abstract loadAll(): Promise<MovieModel[]>;
   abstract updateById(movie: MovieParams, id: string): Promise<void>;
+  abstract loadById(id: string): Promise<MovieModel | null>;
 }

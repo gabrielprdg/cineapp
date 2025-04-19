@@ -21,6 +21,19 @@ export class PostgresSessionRepository implements SessionRepository {
     return result.rows
   }
 
+  async loadById(id: string): Promise<SessionModel | null> {
+    const result = await pgHelper.client.query(
+      'SELECT * FROM session WHERE id = $1',
+      [id]
+    );
+
+    if (result.rows.length > 0) {
+      return result.rows[0];
+    }
+
+    return null;
+  }
+
   async deleteById(id: string): Promise<SessionModel | null> {
     const result = await pgHelper.pool.query(
       'DELETE FROM session WHERE id = $1 RETURNING *',

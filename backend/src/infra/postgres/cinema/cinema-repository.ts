@@ -26,6 +26,19 @@ export class PostgresCinemaRepository implements CinemaRepository {
     return null;
   }
 
+  async loadById(id: string): Promise<CinemaModel | null> {
+    const result = await pgHelper.client.query(
+      'SELECT * FROM cinema WHERE id = $1',
+      [id]
+    );
+
+    if (result.rows.length > 0) {
+      return result.rows[0];
+    }
+
+    return null;
+  }
+
   async updateById(data: CinemaParams, id: string): Promise<void> {
     const { name, city, state } = data
     await pgHelper.client.query(

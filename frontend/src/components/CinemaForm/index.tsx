@@ -17,7 +17,7 @@ export default function CinemaForm() {
 
   useEffect(() => {
     if (isEdit) {
-      api.get(`/cinemas/${id}`)
+      api.get(`/cinema/${id}`)
         .then(res => setFormData(res.data))
         .catch(() => toast.error("Erro ao carregar o cinema"));
     }
@@ -32,10 +32,10 @@ export default function CinemaForm() {
     e.preventDefault();
     try {
       if (isEdit) {
-        await api.patch(`/cinemas/${id}`, formData);
+        await api.put(`/cinema/${id}`, formData);
         toast.success("Cinema atualizado com sucesso!");
       } else {
-        await api.post("/cinemas", formData);
+        await api.post("/cinema", formData);
         toast.success("Cinema cadastrado com sucesso!");
       }
       navigate("/cinemas");

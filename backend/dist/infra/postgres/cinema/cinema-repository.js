@@ -34,6 +34,15 @@ class PostgresCinemaRepository {
             return null;
         });
     }
+    loadById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield postgres_helper_1.pgHelper.client.query('SELECT * FROM cinema WHERE id = $1', [id]);
+            if (result.rows.length > 0) {
+                return result.rows[0];
+            }
+            return null;
+        });
+    }
     updateById(data, id) {
         return __awaiter(this, void 0, void 0, function* () {
             const { name, city, state } = data;

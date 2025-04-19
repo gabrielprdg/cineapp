@@ -12,4 +12,5 @@ export abstract class SessionRepository {
   abstract deleteById(id: string): Promise<SessionModel | null>;
   abstract loadAll(): Promise<SessionModel[]>;
   abstract updateById(session: SessionParams, id: string): Promise<void>;
+  abstract loadById(id: string): Promise<SessionModel | null>;
 }

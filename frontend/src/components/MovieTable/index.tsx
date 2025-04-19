@@ -30,7 +30,7 @@ export default function MovieTable({ movies, onDelete }: Props) {
           <tr>
             <th className="px-6 py-3 text-left">Nome</th>
             <th className="px-6 py-3 text-left">Gênero</th>
-            <th className="px-6 py-3 text-left">Duração (min)</th>
+            <th className="px-6 py-3 text-left">Duração (hr)</th>
             <th className="px-6 py-3 text-left">Classificação</th>
             <th className="px-6 py-3 text-left">Data de Lançamento</th>
             <th className="px-6 py-3 text-left">Sinopse</th>

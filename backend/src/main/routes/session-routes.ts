@@ -4,10 +4,12 @@ import { makeAddSessionController } from '../factories/session/add-session-facto
 import { makeDeleteSessionByIdController } from '../factories/session/delete-session-by-id-factory'
 import { makeLoadSessionsController } from '../factories/session/load-sessions-factory'
 import { makeUpdateSessionByIdController } from '../factories/session/update-session-by-id-factory'
+import { makeLoadSessionByIdController } from '../factories/session/load-session-by-id-factory'
 
 export default (router: Router): void => {
   router.post('/v1/session', adaptRoute(makeAddSessionController()))
   router.get('/v1/sessions', adaptRoute(makeLoadSessionsController()))
-  router.put('/v1/session', adaptRoute(makeUpdateSessionByIdController()))
+  router.get('/v1/session/:id', adaptRoute(makeLoadSessionByIdController()))
+  router.put('/v1/session/:id', adaptRoute(makeUpdateSessionByIdController()))
   router.delete('/v1/session', adaptRoute(makeDeleteSessionByIdController()))
 }

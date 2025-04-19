@@ -9,36 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddSessionController = void 0;
+exports.LoadMovieByIdController = void 0;
 const http_helper_1 = require("../../helpers/http/http-helper");
-class AddSessionController {
-    constructor(validation, addSession) {
-        this.validation = validation;
-        this.addSession = addSession;
+class LoadMovieByIdController {
+    constructor(loadMovieById) {
+        this.loadMovieById = loadMovieById;
     }
     handle(httpRequest) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const error = this.validation.validate(httpRequest.body);
-                if (error) {
-                    return (0, http_helper_1.badRequest)(error);
-                }
-                const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body;
-                const parsedDate = new Date(date);
-                const localDate = new Date(parsedDate.getTime() + (3 * 60 * 60 * 1000));
-                yield this.addSession.add({
-                    movieId,
-                    cinemaId,
-                    dayOfWeek,
-                    date: localDate
-                });
-                return (0, http_helper_1.noContent)();
+                const { id } = httpRequest.params;
+                const movie = yield this.loadMovieById.loadById(id);
+                return (0, http_helper_1.ok)(movie);
             }
             catch (err) {
-                console.log('eeeeee', err);
                 return (0, http_helper_1.serverError)(err);
             }
         });
     }
 }
-exports.AddSessionController = AddSessionController;
+exports.LoadMovieByIdController = LoadMovieByIdController;

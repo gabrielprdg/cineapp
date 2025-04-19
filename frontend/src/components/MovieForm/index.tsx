@@ -13,14 +13,19 @@ export default function MovieForm() {
     gender: "",
     duration: "",
     classification: "",
-    release_date: "",
+    releaseDate: "",
     synopsis: "",
   });
 
   useEffect(() => {
     if (isEdit) {
       api.get(`/movies/${id}`)
-        .then(res => setFormData(res.data))
+        .then(res => {
+          // Formata a data no formato YYYY-MM-DD para o input type="date"
+          const data = res.data;
+          const releaseDate = data.releaseDate?.split("T")[0] || "";
+          setFormData({ ...data, releaseDate: releaseDate });
+        })
         .catch(() => toast.error("Erro ao carregar o filme"));
     }
   }, [id]);
@@ -37,7 +42,7 @@ export default function MovieForm() {
         await api.patch(`/movies/${id}`, formData);
         toast.success("Filme atualizado com sucesso!");
       } else {
-        await api.post("/movies", formData);
+        await api.post("/movie", formData);
         toast.success("Filme criado com sucesso!");
       }
       navigate("/movies");
@@ -50,25 +55,66 @@ export default function MovieForm() {
     <div className="max-w-xl mx-auto p-4">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">{isEdit ? "Editar Filme" : "Cadastrar Filme"}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {[
-          { name: "name", label: "Nome" },
-          { name: "gender", label: "Gênero" },
-          { name: "duration", label: "Duração" },
-          { name: "classification", label: "Classificação" },
-          { name: "release_date", label: "Data de Lançamento" },
-        ].map(field => (
-          <div key={field.name}>
-            <label htmlFor={field.name} className="block text-sm font-medium text-gray-700">{field.label}</label>
-            <input
-              type="text"
-              id={field.name}
-              name={field.name}
-              value={(formData as any)[field.name]}
-              onChange={handleChange}
-              className="mt-1 p-3 w-full border border-gray-300 rounded-md"
-            />
-          </div>
-        ))}
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gênero</label>
+          <input
+            type="text"
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="duration" className="block text-sm font-medium text-gray-700">Duração</label>
+          <input
+            type="text"
+            id="duration"
+            name="duration"
+            value={formData.duration}
+            onChange={handleChange}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="classification" className="block text-sm font-medium text-gray-700">Classificação</label>
+          <input
+            type="text"
+            id="classification"
+            name="classification"
+            value={formData.classification}
+            onChange={handleChange}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="releaseDate" className="block text-sm font-medium text-gray-700">Data de Lançamento</label>
+          <input
+            type="date"
+            id="release_date"
+            name="releaseDate"
+            value={formData.releaseDate}
+            onChange={handleChange}
+            className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+          />
+        </div>
+
         <div>
           <label htmlFor="synopsis" className="block text-sm font-medium text-gray-700">Sinopse</label>
           <textarea

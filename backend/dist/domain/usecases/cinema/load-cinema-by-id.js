@@ -9,29 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateCinemaByIdController = void 0;
-const http_helper_1 = require("../../helpers/http/http-helper");
-class UpdateCinemaByIdController {
-    constructor(updateCinemaById) {
-        this.updateCinemaById = updateCinemaById;
+exports.LoadCinemaById = void 0;
+class LoadCinemaById {
+    constructor(cinemaRepository) {
+        this.cinemaRepository = cinemaRepository;
     }
-    handle(httpRequest) {
+    loadById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { id } = httpRequest.params;
-                const { name, city, state } = httpRequest.body;
-                yield this.updateCinemaById.update(id, {
-                    name,
-                    city,
-                    state
-                });
-                return (0, http_helper_1.noContent)();
-            }
-            catch (err) {
-                console.log('sxssss', err);
-                return (0, http_helper_1.serverError)(err);
-            }
+            return yield this.cinemaRepository.loadById(id);
         });
     }
 }
-exports.UpdateCinemaByIdController = UpdateCinemaByIdController;
+exports.LoadCinemaById = LoadCinemaById;

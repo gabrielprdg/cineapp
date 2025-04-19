@@ -7,7 +7,7 @@ import CreateCinema from './pages/CreateCinema';
 import CreateMovie from './pages/CreateMovie';
 import CreateSession from './pages/CreateSession';
 import Movie from './pages/Movie';
-import UpdateTask from './pages/UpdateTask';
+import UpdateCinema from './pages/UpdateCinema';
 import './styles/global.css';
 
 
@@ -18,8 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route
-          path="/updateTask/:id"
-          element={<UpdateTask />}
+          path="/cinema/:id"
+          element={<UpdateCinema />}
         />
         <Route
           path="/movies"

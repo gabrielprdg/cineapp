@@ -17,7 +17,7 @@ export default function CinemasTable({ cinemas, onDelete }: Props) {
   const navigate = useNavigate();
 
   const handleEdit = (id: string) => {
-    navigate(`/cinema/edit/${id}`);
+    navigate(`/cinema/${id}`);
   };
 
   return (
