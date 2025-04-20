@@ -11,5 +11,5 @@ exports.default = (router) => {
     router.get('/v1/sessions', (0, express_route_adapter_1.adaptRoute)((0, load_sessions_factory_1.makeLoadSessionsController)()));
     router.get('/v1/session/:id', (0, express_route_adapter_1.adaptRoute)((0, load_session_by_id_factory_1.makeLoadSessionByIdController)()));
     router.put('/v1/session/:id', (0, express_route_adapter_1.adaptRoute)((0, update_session_by_id_factory_1.makeUpdateSessionByIdController)()));
-    router.delete('/v1/session', (0, express_route_adapter_1.adaptRoute)((0, delete_session_by_id_factory_1.makeDeleteSessionByIdController)()));
+    router.delete('/v1/session/:id', (0, express_route_adapter_1.adaptRoute)((0, delete_session_by_id_factory_1.makeDeleteSessionByIdController)()));
 };

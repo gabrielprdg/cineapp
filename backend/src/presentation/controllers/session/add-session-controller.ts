@@ -34,7 +34,6 @@ export class AddSessionController implements Controller {
 
       return noContent()
     } catch (err: any) {
-      console.log('eeeeee', err)
       return serverError(err)
     }
   }

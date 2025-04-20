@@ -7,7 +7,6 @@ export class AddCinema {
   }
 
   async add(data: CinemaParams): Promise<void> {
-    console.log('gggggggggggggggg', data)
     await this.addCinemaRepository.create(data)
   }
 }

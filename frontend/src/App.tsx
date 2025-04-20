@@ -9,6 +9,9 @@ import CreateSession from './pages/CreateSession';
 import Movie from './pages/Movie';
 import UpdateCinema from './pages/UpdateCinema';
 import './styles/global.css';
+import UpdateMovie from './pages/UpdateMovie';
+import Session from './pages/Session';
+import UpdateSession from './pages/UpdateSession';
 
 
 function App() {
@@ -21,10 +24,28 @@ function App() {
           path="/cinema/:id"
           element={<UpdateCinema />}
         />
+
+        <Route
+          path="/movie/:id"
+          element={<UpdateMovie />}
+        />
+
+        <Route
+          path="/session/:id"
+          element={<UpdateSession />}
+        />
+
         <Route
           path="/movies"
           element={<Movie />}
         />
+
+
+        <Route
+          path="/sessions"
+          element={<Session />}
+        />
+
 
         <Route
           path="/cinemas"

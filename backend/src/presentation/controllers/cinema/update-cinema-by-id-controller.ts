@@ -24,7 +24,6 @@ export class UpdateCinemaByIdController implements Controller {
 
       return noContent()
     } catch (err: any) {
-      console.log('sxssss', err)
       return serverError(err)
     }
   }

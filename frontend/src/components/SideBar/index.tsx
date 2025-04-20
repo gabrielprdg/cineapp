@@ -26,8 +26,14 @@ export default function Sidebar() {
       <nav className="flex-1 p-2 space-y-1">
         <SidebarItem
           icon={<Home />}
-          label="Sessões"
+          label="Início"
           onClick={() => navigate("/")}
+          isExpanded={isExpanded}
+        />
+        <SidebarItem
+          icon={<Calendar />}
+          label="Sessões"
+          onClick={() => navigate("/sessions")}
           isExpanded={isExpanded}
         />
         <SidebarItem
@@ -71,7 +77,8 @@ function SidebarItem({ icon, label, onClick, isExpanded }: SidebarItemProps) {
     >
       <span className="mr-3">{icon}</span>
       <span
-        className={`text-sm font-medium transition-all duration-300 ease-in-out ${isExpanded ? "block" : "hidden"}`}
+        className={`text-sm font-medium transition-all duration-300 ease-in-out ${isExpanded ? "block" : "hidden"
+          }`}
       >
         {label}
       </span>

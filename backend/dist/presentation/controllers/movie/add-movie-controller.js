@@ -35,7 +35,6 @@ class AddMovieController {
                 return (0, http_helper_1.noContent)();
             }
             catch (err) {
-                console.log('bvccccccccccc', err);
                 return (0, http_helper_1.serverError)(err);
             }
         });

@@ -1,79 +1,77 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
-import MovieTable from "../../components/MovieTable";
+import SessionTable from "../../components/SessionTable";
 import { toast } from "react-toastify";
 
-type Movie = {
+type Session = {
   id: string;
-  gender: string;
-  name: string;
-  duration: number;
-  classification: string;
-  release_date: string;
-  synopsis: string;
+  movie_id: string;
+  cinema_id: string;
+  day_of_week: string;
+  date: string;
 };
 
-export default function Movie() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
+export default function Session() {
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchSessions = async () => {
       try {
-        const response = await api.get("/movies");
-        setMovies(response.data);
+        const response = await api.get("/sessions");
+        setSessions(response.data);
       } catch (error) {
-        console.error("Erro ao buscar filmes:", error);
+        console.error("Erro ao buscar sessões:", error);
       }
     };
 
-    fetchMovies();
+    fetchSessions();
   }, []);
 
-  const handleCreateMovie = () => {
-    navigate("/CreateMovie");
+  const handleCreateSession = () => {
+    navigate("/CreateSession");
   };
 
   const handleRequestDelete = (id: string) => {
-    setSelectedMovieId(id);
+    setSelectedSessionId(id);
     setShowModal(true);
   };
 
   const handleConfirmDelete = async () => {
-    if (!selectedMovieId) return;
+    if (!selectedSessionId) return;
     try {
-      await api.delete(`/movie/${selectedMovieId}`);
-      setMovies(prev => prev.filter(m => m.id !== selectedMovieId));
+      await api.delete(`/session/${selectedSessionId}`);
+      setSessions(prev => prev.filter(s => s.id !== selectedSessionId));
     } catch (error) {
-      toast.error("Erro ao deletar filme");
+      toast.error("Erro ao deletar sessão");
     } finally {
       setShowModal(false);
-      setSelectedMovieId(null);
+      setSelectedSessionId(null);
     }
   };
 
   return (
     <div className="p-8 pr-12">
       <div className="flex justify-between items-center">
-        <h1 className="m-12 text-4xl font-semibold text-gray-800">Filmes</h1>
+        <h1 className="m-12 text-4xl font-semibold text-gray-800">Gerenciar Sessões</h1>
         <button
-          onClick={handleCreateMovie}
+          onClick={handleCreateSession}
           className="mr-12 px-4 py-2 cursor-pointer bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           +
         </button>
       </div>
 
-      <MovieTable movies={movies} onDelete={handleRequestDelete} />
+      <SessionTable sessions={sessions} onDelete={handleRequestDelete} />
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Confirmar exclusão</h2>
-            <p className="text-gray-600 mb-6">Tem certeza que deseja excluir este filme?</p>
+            <p className="text-gray-600 mb-6">Tem certeza que deseja excluir esta sessão?</p>
             <div className="flex justify-end gap-4">
               <button
                 onClick={() => setShowModal(false)}

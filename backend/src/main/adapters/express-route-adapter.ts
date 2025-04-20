@@ -4,8 +4,6 @@ import { Request, RequestHandler, Response } from 'express'
 export const adaptRoute = (controller: Controller): RequestHandler => {
   return async (req: Request, res: Response) => {
 
-    console.log('vcccc', req.body)
-
     const httpRequest: HttpRequest = {
       body: req.body,
       params: req.params

@@ -21,12 +21,10 @@ export const makeAddCinemaValidation = (): Validation => {
 
 const makeDbAddCinema = (): AddCinema => {
   const CinemaPgRepository = new PostgresCinemaRepository()
-  console.log('gnnnnnnnnnnnnnnn')
   return new AddCinema(CinemaPgRepository)
 }
 
 export const makeAddCinemaController = (): Controller => {
-  console.log('ssssssssssss')
   const controller = new AddCinemaController(makeAddCinemaValidation(), makeDbAddCinema())
   return controller
 }

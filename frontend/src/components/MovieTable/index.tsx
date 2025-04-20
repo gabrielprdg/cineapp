@@ -20,7 +20,7 @@ export default function MovieTable({ movies, onDelete }: Props) {
   const navigate = useNavigate();
 
   const handleEdit = (id: string) => {
-    navigate(`/movie/edit/${id}`);
+    navigate(`/movie/${id}`);
   };
 
   return (
@@ -51,13 +51,13 @@ export default function MovieTable({ movies, onDelete }: Props) {
               <td className="px-6 py-3 text-center flex justify-center gap-4">
                 <button
                   onClick={() => handleEdit(movie.id)}
-                  className="text-blue-500 hover:text-blue-700"
+                  className="text-blue-500 cursor-pointer hover:text-blue-700"
                 >
                   <Pencil size={18} />
                 </button>
                 <button
                   onClick={() => onDelete(movie.id)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-500 cursor-pointer hover:text-red-700"
                 >
                   <Trash2 size={18} />
                 </button>

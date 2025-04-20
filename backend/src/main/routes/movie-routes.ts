@@ -10,6 +10,6 @@ export default (router: Router): void => {
   router.post('/v1/movie', adaptRoute(makeAddMovieController()))
   router.get('/v1/movies', adaptRoute(makeLoadMoviesController()))
   router.get('/v1/movie/:id', adaptRoute(makeLoadMovieByIdController()))
-  router.put('/v1/movie:id', adaptRoute(makeUpdateMovieByIdController()))
-  router.delete('/v1/movie', adaptRoute(makeDeleteMovieByIdController()))
+  router.put('/v1/movie/:id', adaptRoute(makeUpdateMovieByIdController()))
+  router.delete('/v1/movie/:id', adaptRoute(makeDeleteMovieByIdController()))
 }

@@ -11,5 +11,5 @@ export default (router: Router): void => {
   router.get('/v1/sessions', adaptRoute(makeLoadSessionsController()))
   router.get('/v1/session/:id', adaptRoute(makeLoadSessionByIdController()))
   router.put('/v1/session/:id', adaptRoute(makeUpdateSessionByIdController()))
-  router.delete('/v1/session', adaptRoute(makeDeleteSessionByIdController()))
+  router.delete('/v1/session/:id', adaptRoute(makeDeleteSessionByIdController()))
 }

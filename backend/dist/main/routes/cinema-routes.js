@@ -11,5 +11,5 @@ exports.default = (router) => {
     router.get('/v1/cinemas', (0, express_route_adapter_1.adaptRoute)((0, load_cinemas_factory_1.makeLoadCinemasController)()));
     router.get('/v1/cinema/:id', (0, express_route_adapter_1.adaptRoute)((0, load_cinema_by_id_factory_1.makeLoadCinemaByIdController)()));
     router.put('/v1/cinema/:id', (0, express_route_adapter_1.adaptRoute)((0, update_cinema_by_id_factory_1.makeUpdateCinemaByIdController)()));
-    router.delete('/v1/cinema', (0, express_route_adapter_1.adaptRoute)((0, delete_cinema_by_id_factory_1.makeDeleteCinemaByIdController)()));
+    router.delete('/v1/cinema/:id', (0, express_route_adapter_1.adaptRoute)((0, delete_cinema_by_id_factory_1.makeDeleteCinemaByIdController)()));
 };

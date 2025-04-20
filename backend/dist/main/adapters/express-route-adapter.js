@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.adaptRoute = void 0;
 const adaptRoute = (controller) => {
     return (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log('vcccc', req.body);
         const httpRequest = {
             body: req.body,
             params: req.params

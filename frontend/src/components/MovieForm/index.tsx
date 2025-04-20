@@ -13,22 +13,26 @@ export default function MovieForm() {
     gender: "",
     duration: "",
     classification: "",
-    releaseDate: "",
+    release_date: "",
     synopsis: "",
   });
 
   useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const res = await api.get(`/movie/${id}`);
+        const data = res.data;
+        const release_date = data.release_date?.split("T")[0] || "";
+        setFormData({ ...data, release_date });
+      } catch (error) {
+        toast.error("Erro ao carregar o filme");
+      }
+    };
+
     if (isEdit) {
-      api.get(`/movies/${id}`)
-        .then(res => {
-          // Formata a data no formato YYYY-MM-DD para o input type="date"
-          const data = res.data;
-          const releaseDate = data.releaseDate?.split("T")[0] || "";
-          setFormData({ ...data, releaseDate: releaseDate });
-        })
-        .catch(() => toast.error("Erro ao carregar o filme"));
+      fetchMovie();
     }
-  }, [id]);
+  }, [id, isEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,10 +43,15 @@ export default function MovieForm() {
     e.preventDefault();
     try {
       if (isEdit) {
-        await api.patch(`/movies/${id}`, formData);
+        await api.put(`/movie/${id}`, formData);
         toast.success("Filme atualizado com sucesso!");
       } else {
-        await api.post("/movie", formData);
+        // Se o backend exige releaseDate (camelCase), converte só nesse momento
+        const { release_date, ...rest } = formData;
+        await api.post("/movie", {
+          ...rest,
+          releaseDate: release_date,
+        });
         toast.success("Filme criado com sucesso!");
       }
       navigate("/movies");
@@ -53,7 +62,9 @@ export default function MovieForm() {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">{isEdit ? "Editar Filme" : "Cadastrar Filme"}</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        {isEdit ? "Editar Filme" : "Cadastrar Filme"}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
@@ -104,12 +115,12 @@ export default function MovieForm() {
         </div>
 
         <div>
-          <label htmlFor="releaseDate" className="block text-sm font-medium text-gray-700">Data de Lançamento</label>
+          <label htmlFor="release_date" className="block text-sm font-medium text-gray-700">Data de Lançamento</label>
           <input
             type="date"
             id="release_date"
-            name="releaseDate"
-            value={formData.releaseDate}
+            name="release_date"
+            value={formData.release_date}
             onChange={handleChange}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md"
           />
@@ -126,14 +137,14 @@ export default function MovieForm() {
           />
         </div>
 
-        <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-md">
+        <button type="submit" className="w-full cursor-pointer py-3 bg-blue-500 text-white rounded-md">
           {isEdit ? "Atualizar" : "Cadastrar"}
         </button>
 
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="mt-4 w-full py-3 bg-red-500 text-white rounded-md"
+          className="mt-4 w-full cursor-pointer py-3 bg-red-500 text-white rounded-md"
         >
           Voltar
         </button>

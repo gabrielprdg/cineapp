@@ -5,7 +5,6 @@ import { pgHelper } from '../helper/postgres-helper'
 
 export class PostgresCinemaRepository implements CinemaRepository {
   async create(data: CinemaParams): Promise<void> {
-    console.log('vvvvvvvvvvv', data)
     const { name, city, state } = data
     await pgHelper.client.query(
       'INSERT INTO cinema (name, city, state) VALUES ($1, $2, $3)',

@@ -13,7 +13,6 @@ export class AddCinemaController implements Controller {
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    console.log('kkkkkkkkkkkk', httpRequest)
     try {
 
 
@@ -26,7 +25,6 @@ export class AddCinemaController implements Controller {
 
       return noContent()
     } catch (err: any) {
-      console.log('eeeeeeeee', err)
       return serverError(err)
     }
   }

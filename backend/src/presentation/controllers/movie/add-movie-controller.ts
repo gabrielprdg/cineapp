@@ -31,7 +31,6 @@ export class AddMovieController implements Controller {
 
       return noContent()
     } catch (err: any) {
-      console.log('bvccccccccccc', err)
       return serverError(err)
     }
   }

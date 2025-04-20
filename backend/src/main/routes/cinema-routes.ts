@@ -11,5 +11,5 @@ export default (router: Router): void => {
   router.get('/v1/cinemas', adaptRoute(makeLoadCinemasController()))
   router.get('/v1/cinema/:id', adaptRoute(makeLoadCinemaByIdController()))
   router.put('/v1/cinema/:id', adaptRoute(makeUpdateCinemaByIdController()))
-  router.delete('/v1/cinema', adaptRoute(makeDeleteCinemaByIdController()))
+  router.delete('/v1/cinema/:id', adaptRoute(makeDeleteCinemaByIdController()))
 }

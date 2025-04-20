@@ -12,22 +12,38 @@ export default function SessionForm() {
   const isEdit = Boolean(id);
 
   const [formData, setFormData] = useState({
-    movieId: "",
-    cinemaId: "",
-    dayOfWeek: "",
-    date: "",
+    movie_id: "",
+    cinema_id: "",
+    day_of_week: "",
+    date: "", // formato "HH:mm"
   });
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   useEffect(() => {
-    api.get("/movies").then(res => setMovies(res.data)).catch(() => toast.error("Erro ao buscar filmes"));
-    api.get("/cinemas").then(res => setCinemas(res.data)).catch(() => toast.error("Erro ao buscar cinemas"));
+    api.get("/movies")
+      .then(res => setMovies(res.data))
+      .catch(() => toast.error("Erro ao buscar filmes"));
+
+    api.get("/cinemas")
+      .then(res => setCinemas(res.data))
+      .catch(() => toast.error("Erro ao buscar cinemas"));
 
     if (isEdit) {
-      api.get(`/sessions/${id}`)
-        .then(res => setFormData(res.data))
+      api.get(`/session/${id}`)
+        .then(res => {
+          const sessionData = res.data;
+          const dateObj = new Date(sessionData.date);
+          const hours = String(dateObj.getHours()).padStart(2, "0");
+          const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+          const formattedTime = `${hours}:${minutes}`;
+
+          setFormData({
+            ...sessionData,
+            date: formattedTime,
+          });
+        })
         .catch(() => toast.error("Erro ao carregar sessão"));
     }
   }, [id]);
@@ -41,41 +57,39 @@ export default function SessionForm() {
     e.preventDefault();
 
     try {
+      // Converter "HH:mm" para ISO string
       const [hour, minute] = formData.date.split(":").map(Number);
-
       const now = new Date();
-      const targetDate = new Date(
+      const dateWithTime = new Date(
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
         hour,
         minute,
-        0,
         0
       );
 
-      // Ajusta para o fuso de São Paulo (GMT-3)
-      const offsetMs = targetDate.getTimezoneOffset() * 60000;
-      const localDate = new Date(targetDate.getTime() - offsetMs);
+      const offsetMs = dateWithTime.getTimezoneOffset() * 60000;
+      const localDate = new Date(dateWithTime.getTime() - offsetMs);
 
       const payload = {
         ...formData,
-        date: localDate.toISOString(), // Agora a hora será corretamente refletida em UTC
+        date: localDate.toISOString(),
       };
 
       if (isEdit) {
-        await api.patch(`/sessions/${id}`, payload);
+        await api.put(`/session/${id}`, payload);
         toast.success("Sessão atualizada com sucesso!");
       } else {
         await api.post("/session", payload);
-        toast.success("Sessão criada com sucesso!");
+        toast.success("Sessão cadastrada com sucesso!");
       }
+
+      navigate(-1);
     } catch {
       toast.error("Erro ao salvar sessão");
     }
   };
-
-
 
   return (
     <div className="max-w-xl mx-auto p-4">
@@ -84,8 +98,8 @@ export default function SessionForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Filme</label>
           <select
-            name="movieId"
-            value={formData.movieId}
+            name="movie_id"
+            value={formData.movie_id}
             onChange={handleChange}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md"
           >
@@ -99,8 +113,8 @@ export default function SessionForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Cinema</label>
           <select
-            name="cinemaId"
-            value={formData.cinemaId}
+            name="cinema_id"
+            value={formData.cinema_id}
             onChange={handleChange}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md"
           >
@@ -114,8 +128,8 @@ export default function SessionForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Dia da Semana</label>
           <select
-            name="dayOfWeek"
-            value={formData.dayOfWeek}
+            name="day_of_week"
+            value={formData.day_of_week}
             onChange={handleChange}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md"
           >
@@ -130,7 +144,6 @@ export default function SessionForm() {
           </select>
         </div>
 
-
         <div>
           <label className="block text-sm font-medium text-gray-700">Horário</label>
           <input
@@ -139,9 +152,8 @@ export default function SessionForm() {
             value={formData.date}
             onChange={handleChange}
             className="mt-1 p-3 w-full border border-gray-300 rounded-md"
+            required
           />
-
-
         </div>
 
         <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-md">
