@@ -1,12 +1,12 @@
 import { MovieModel } from '../models/movie'
 
 export type MovieParams = {
-  gender: string
-  name: string
-  duration: number
-  classification: string
-  release_date: Date
-  synopsis: string
+  gender?: string
+  name?: string
+  duration?: number
+  classification?: string
+  release_date?: Date
+  synopsis?: string
 }
 
 export abstract class MovieRepository {
