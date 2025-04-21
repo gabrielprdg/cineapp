@@ -16,7 +16,6 @@ class AddCinema {
     }
     add(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('gggggggggggggggg', data);
             yield this.addCinemaRepository.create(data);
         });
     }

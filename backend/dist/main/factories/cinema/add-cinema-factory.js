@@ -21,11 +21,9 @@ const makeAddCinemaValidation = () => {
 exports.makeAddCinemaValidation = makeAddCinemaValidation;
 const makeDbAddCinema = () => {
     const CinemaPgRepository = new cinema_repository_1.PostgresCinemaRepository();
-    console.log('gnnnnnnnnnnnnnnn');
     return new add_cinema_1.AddCinema(CinemaPgRepository);
 };
 const makeAddCinemaController = () => {
-    console.log('ssssssssssss');
     const controller = new add_cinema_controller_1.AddCinemaController((0, exports.makeAddCinemaValidation)(), makeDbAddCinema());
     return controller;
 };

@@ -46,11 +46,10 @@ export default function MovieForm() {
         await api.put(`/movie/${id}`, formData);
         toast.success("Filme atualizado com sucesso!");
       } else {
-        // Se o backend exige releaseDate (camelCase), converte só nesse momento
         const { release_date, ...rest } = formData;
         await api.post("/movie", {
           ...rest,
-          releaseDate: release_date,
+          release_date,
         });
         toast.success("Filme criado com sucesso!");
       }

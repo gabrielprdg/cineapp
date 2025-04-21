@@ -1,15 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import Table from "./components/Table";
+import { Session } from "./pages/Session";
 
 export default function Home() {
-  const [sessions, setSessions] = useState<any[]>([]);
-  const navigate = useNavigate();
-
-  const handleSessionDelete = (deletedSessionId: number) => {
-    setSessions(prev => prev.filter(session => session.id !== deletedSessionId));
-  };
+  const [sessions, setSessions] = useState<Session[]>([]);
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -23,10 +18,6 @@ export default function Home() {
 
     fetchSessions();
   }, []);
-
-  const handleCreateSession = () => {
-    navigate('/createSession');
-  };
 
   return (
     <div className="p-8 pr-12">

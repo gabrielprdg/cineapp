@@ -6,7 +6,7 @@ const session_repository_1 = require("../../../infra/postgres/session/session-re
 const add_session_controller_1 = require("../../../presentation/controllers/session/add-session-controller");
 const required_field_validation_1 = require("../../../presentation/validation/required-field-validation");
 const makeAddSessionValidation = () => {
-    const requiredFields = ['movieId', 'cinemaId', 'dayOfWeek', 'date'];
+    const requiredFields = ['movie_id', 'cinema_id', 'day_of_week', 'date'];
     const validations = requiredFields.map(field => new required_field_validation_1.RequiredFieldValidation(field));
     return {
         validate: (input) => {

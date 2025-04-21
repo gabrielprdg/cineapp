@@ -14,12 +14,12 @@ const postgres_helper_1 = require("../helper/postgres-helper");
 class PostgresSessionRepository {
     create(session) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { movieId, cinemaId, dayOfWeek, date } = session;
+            const { movie_id, cinema_id, day_of_week, date } = session;
             const result = yield postgres_helper_1.pgHelper.pool.query(`
       INSERT INTO session (movie_id, cinema_id, day_of_week, date)
       VALUES ($1, $2, $3, $4)
       RETURNING id
-      `, [movieId, cinemaId, dayOfWeek, date]);
+      `, [movie_id, cinema_id, day_of_week, date]);
             return result.rows[0].id;
         });
     }
@@ -49,7 +49,7 @@ class PostgresSessionRepository {
     }
     updateById(session, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { movieId, cinemaId, dayOfWeek, date } = session;
+            const { movie_id, cinema_id, day_of_week, date } = session;
             yield postgres_helper_1.pgHelper.pool.query(`
       UPDATE session SET
         movie_id = COALESCE($1, movie_id),
@@ -57,7 +57,7 @@ class PostgresSessionRepository {
         day_of_week = COALESCE($3, day_of_week),
         date = COALESCE($4, date)
       WHERE id = $5
-      `, [movieId, cinemaId, dayOfWeek, date, id]);
+      `, [movie_id, cinema_id, day_of_week, date, id]);
         });
     }
 }

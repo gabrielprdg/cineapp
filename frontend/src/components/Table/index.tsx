@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { api } from "../../../services/api";
+import { Session } from "../../pages/Session";
 
 type Props = {
-  sessions: any[];
+  sessions: Session[];
 };
 
 type Movie = {
@@ -11,12 +11,18 @@ type Movie = {
   name: string;
 };
 
-const organizeSessions = (sessions: any[]) => {
+type EnrichedSession = Session & { name: string };
+
+const organizeSessions = (sessions: EnrichedSession[]) => {
   const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
-  const sessionsByTime: Record<string, Record<string, any[]>> = {};
+  const sessionsByTime: Record<string, Record<string, EnrichedSession[]>> = {}; // <--- aqui também
 
   sessions.forEach(session => {
-    const time = new Date(session.date).toISOString().substring(11, 16); // HH:MM
+    const date = new Date(session.date);
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const time = `${hours}:${minutes}`;
+
     const day = session.day_of_week;
 
     if (!sessionsByTime[time]) {
@@ -33,6 +39,7 @@ const organizeSessions = (sessions: any[]) => {
   return { sessionsByTime, daysOfWeek };
 };
 
+
 export default function Table({ sessions }: Props) {
   const [moviesMap, setMoviesMap] = useState<Record<number, string>>({});
 
@@ -46,10 +53,9 @@ export default function Table({ sessions }: Props) {
     });
   }, []);
 
-  // Enriquecer sessões com o nome do filme
-  const enrichedSessions = sessions.map(session => ({
+  const enrichedSessions: EnrichedSession[] = sessions.map(session => ({
     ...session,
-    name: moviesMap[session.movie_id] || "Filme desconhecido",
+    name: moviesMap[parseInt(session.movie_id)] || "Filme desconhecido",
   }));
 
   const { sessionsByTime, daysOfWeek } = organizeSessions(enrichedSessions);

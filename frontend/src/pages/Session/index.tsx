@@ -4,7 +4,7 @@ import { api } from "../../../services/api";
 import SessionTable from "../../components/SessionTable";
 import { toast } from "react-toastify";
 
-type Session = {
+export type Session = {
   id: string;
   movie_id: string;
   cinema_id: string;

@@ -5,7 +5,7 @@ export type MovieParams = {
   name?: string
   duration?: number
   classification?: string
-  releaseDate?: Date
+  release_date?: Date
   synopsis?: string
 }
 

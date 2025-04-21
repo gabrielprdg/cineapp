@@ -4,10 +4,10 @@ import { pgHelper } from '../helper/postgres-helper'
 
 export class PostgresMovieRepository implements MovieRepository {
   async create(data: MovieParams): Promise<void> {
-    const { gender, name, duration, classification, releaseDate, synopsis } = data
+    const { gender, name, duration, classification, release_date, synopsis } = data
     await pgHelper.pool.query(
       'INSERT INTO movie (gender, name, duration, classification, release_date, synopsis) VALUES ($1, $2, $3,$4, $5, $6)',
-      [gender, name, duration, classification, releaseDate, synopsis]
+      [gender, name, duration, classification, release_date, synopsis]
     )
   }
 
@@ -38,7 +38,7 @@ export class PostgresMovieRepository implements MovieRepository {
   }
 
   async updateById(data: MovieParams, id: string): Promise<void> {
-    const { gender, name, duration, classification, releaseDate, synopsis } = data
+    const { gender, name, duration, classification, release_date, synopsis } = data
     await pgHelper.pool.query(
       `
       UPDATE movie SET
@@ -50,7 +50,7 @@ export class PostgresMovieRepository implements MovieRepository {
         synopsis = COALESCE($6, synopsis)
       WHERE id = $7
       `,
-      [name, gender, duration, classification, releaseDate, synopsis, id]
+      [name, gender, duration, classification, release_date, synopsis, id]
     );
   }
 } 

@@ -4,14 +4,14 @@ import { pgHelper } from '../helper/postgres-helper'
 
 export class PostgresSessionRepository implements SessionRepository {
   async create(session: SessionParams): Promise<string> {
-    const { movieId, cinemaId, dayOfWeek, date } = session
+    const { movie_id, cinema_id, day_of_week, date } = session
     const result = await pgHelper.pool.query(
       `
       INSERT INTO session (movie_id, cinema_id, day_of_week, date)
       VALUES ($1, $2, $3, $4)
       RETURNING id
       `,
-      [movieId, cinemaId, dayOfWeek, date]
+      [movie_id, cinema_id, day_of_week, date]
     )
     return result.rows[0].id
   }
@@ -46,7 +46,7 @@ export class PostgresSessionRepository implements SessionRepository {
   }
 
   async updateById(session: SessionParams, id: string): Promise<void> {
-    const { movieId, cinemaId, dayOfWeek, date } = session
+    const { movie_id, cinema_id, day_of_week, date } = session
     await pgHelper.pool.query(
       `
       UPDATE session SET
@@ -56,7 +56,7 @@ export class PostgresSessionRepository implements SessionRepository {
         date = COALESCE($4, date)
       WHERE id = $5
       `,
-      [movieId, cinemaId, dayOfWeek, date, id]
+      [movie_id, cinema_id, day_of_week, date, id]
     )
   }
 }

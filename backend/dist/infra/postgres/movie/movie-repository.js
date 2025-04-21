@@ -14,8 +14,8 @@ const postgres_helper_1 = require("../helper/postgres-helper");
 class PostgresMovieRepository {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { gender, name, duration, classification, releaseDate, synopsis } = data;
-            yield postgres_helper_1.pgHelper.pool.query('INSERT INTO movie (gender, name, duration, classification, release_date, synopsis) VALUES ($1, $2, $3,$4, $5, $6)', [gender, name, duration, classification, releaseDate, synopsis]);
+            const { gender, name, duration, classification, release_date, synopsis } = data;
+            yield postgres_helper_1.pgHelper.pool.query('INSERT INTO movie (gender, name, duration, classification, release_date, synopsis) VALUES ($1, $2, $3,$4, $5, $6)', [gender, name, duration, classification, release_date, synopsis]);
         });
     }
     loadAll() {
@@ -44,7 +44,7 @@ class PostgresMovieRepository {
     }
     updateById(data, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { gender, name, duration, classification, releaseDate, synopsis } = data;
+            const { gender, name, duration, classification, release_date, synopsis } = data;
             yield postgres_helper_1.pgHelper.pool.query(`
       UPDATE movie SET
         name = COALESCE($1, name),
@@ -54,7 +54,7 @@ class PostgresMovieRepository {
         release_date = COALESCE($5, release_date),
         synopsis = COALESCE($6, synopsis)
       WHERE id = $7
-      `, [name, gender, duration, classification, releaseDate, synopsis, id]);
+      `, [name, gender, duration, classification, release_date, synopsis, id]);
         });
     }
 }

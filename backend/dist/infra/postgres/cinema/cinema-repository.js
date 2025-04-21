@@ -14,7 +14,6 @@ const postgres_helper_1 = require("../helper/postgres-helper");
 class PostgresCinemaRepository {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('vvvvvvvvvvv', data);
             const { name, city, state } = data;
             yield postgres_helper_1.pgHelper.client.query('INSERT INTO cinema (name, city, state) VALUES ($1, $2, $3)', [name, city, state]);
         });

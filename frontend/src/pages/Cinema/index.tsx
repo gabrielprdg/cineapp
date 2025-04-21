@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
 import { api } from "../../../services/api";
+import { toast } from "react-toastify";
 
 type Cinema = {
   id: string;
@@ -44,16 +45,11 @@ export default function Cinema() {
       await api.delete(`/cinema/${selectedCinemaId}`);
       setCinemas(prev => prev.filter(c => c.id !== selectedCinemaId));
     } catch (error) {
-      console.error("Erro ao deletar cinema:", error);
+      toast.error("Erro ao deletar cinema");
     } finally {
       setShowModal(false);
       setSelectedCinemaId(null);
     }
-  };
-
-  const handleCancelDelete = () => {
-    setShowModal(false);
-    setSelectedCinemaId(null);
   };
 
   const handleEdit = (id: string) => {

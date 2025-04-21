@@ -1,7 +1,7 @@
 export type SessionModel = {
     id: string
-    movieId: string
-    cinemaId: string
-    dayOfWeek: string
+    movie_id: string
+    cinema_id: string
+    day_of_week: string
     date: Date
 }

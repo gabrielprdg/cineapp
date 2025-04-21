@@ -13,12 +13,12 @@ export class UpdateSessionByIdController implements Controller {
 
 
       const { id } = httpRequest.params
-      const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body
+      const { movie_id, cinema_id, day_of_week, date } = httpRequest.body
 
       await this.updateSessionById.update(id, {
-        movieId,
-        cinemaId,
-        dayOfWeek,
+        movie_id,
+        cinema_id,
+        day_of_week,
         date
       })
 

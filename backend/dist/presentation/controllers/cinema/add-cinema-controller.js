@@ -18,7 +18,6 @@ class AddCinemaController {
     }
     handle(httpRequest) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('kkkkkkkkkkkk', httpRequest);
             try {
                 const { name, city, state } = httpRequest.body;
                 yield this.addCinema.add({
@@ -29,7 +28,6 @@ class AddCinemaController {
                 return (0, http_helper_1.noContent)();
             }
             catch (err) {
-                console.log('eeeeeeeee', err);
                 return (0, http_helper_1.serverError)(err);
             }
         });

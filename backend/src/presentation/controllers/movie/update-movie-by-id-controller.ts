@@ -13,15 +13,15 @@ export class UpdateMovieByIdController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
 
-      const movieId = httpRequest.params?.id
-      const { gender, name, duration, classification, releaseDate, synopsis } = httpRequest.body
+      const movie_id = httpRequest.params?.id
+      const { gender, name, duration, classification, release_date, synopsis } = httpRequest.body
 
-      await this.updateMovieById.update(movieId, {
+      await this.updateMovieById.update(movie_id, {
         gender,
         name,
         duration,
         classification,
-        releaseDate,
+        release_date,
         synopsis
       })
 

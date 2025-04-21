@@ -19,13 +19,13 @@ export class AddMovieController implements Controller {
         return badRequest(error)
       }
 
-      const { gender, name, duration, classification, releaseDate, synopsis } = httpRequest.body
+      const { gender, name, duration, classification, release_date, synopsis } = httpRequest.body
       await this.addMovie.add({
         gender,
         name,
         duration,
         classification,
-        releaseDate,
+        release_date,
         synopsis
       })
 

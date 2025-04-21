@@ -5,7 +5,7 @@ import { Controller, Validation } from "../../../presentation/protocols"
 import { RequiredFieldValidation } from "../../../presentation/validation/required-field-validation"
 
 export const makeAddSessionValidation = (): Validation => {
-  const requiredFields = ['movieId', 'cinemaId', 'dayOfWeek', 'date']
+  const requiredFields = ['movie_id', 'cinema_id', 'day_of_week', 'date']
   const validations = requiredFields.map(field => new RequiredFieldValidation(field))
 
   return {

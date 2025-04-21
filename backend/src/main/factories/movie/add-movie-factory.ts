@@ -5,7 +5,7 @@ import { Controller, Validation } from "../../../presentation/protocols"
 import { RequiredFieldValidation } from "../../../presentation/validation/required-field-validation"
 
 export const makeAddMovieValidation = (): Validation => {
-  const requiredFields = ['name', 'gender', 'duration', 'classification', 'releaseDate', 'synopsis']
+  const requiredFields = ['name', 'gender', 'duration', 'classification', 'release_date', 'synopsis']
   const validations = requiredFields.map(field => new RequiredFieldValidation(field))
 
   return {

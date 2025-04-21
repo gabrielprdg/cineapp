@@ -6,7 +6,7 @@ const movie_repository_1 = require("../../../infra/postgres/movie/movie-reposito
 const add_movie_controller_1 = require("../../../presentation/controllers/movie/add-movie-controller");
 const required_field_validation_1 = require("../../../presentation/validation/required-field-validation");
 const makeAddMovieValidation = () => {
-    const requiredFields = ['name', 'gender', 'duration', 'classification', 'releaseDate', 'synopsis'];
+    const requiredFields = ['name', 'gender', 'duration', 'classification', 'release_date', 'synopsis'];
     const validations = requiredFields.map(field => new required_field_validation_1.RequiredFieldValidation(field));
     return {
         validate: (input) => {

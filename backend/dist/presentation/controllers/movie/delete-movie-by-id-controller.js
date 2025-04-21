@@ -26,7 +26,6 @@ class DeleteMovieByIdController {
                 return (0, http_helper_1.noContent)();
             }
             catch (err) {
-                console.log('ssssssss', err);
                 return (0, http_helper_1.serverError)(err);
             }
         });

@@ -19,14 +19,14 @@ class UpdateMovieByIdController {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const movieId = (_a = httpRequest.params) === null || _a === void 0 ? void 0 : _a.id;
-                const { gender, name, duration, classification, releaseDate, synopsis } = httpRequest.body;
-                yield this.updateMovieById.update(movieId, {
+                const movie_id = (_a = httpRequest.params) === null || _a === void 0 ? void 0 : _a.id;
+                const { gender, name, duration, classification, release_date, synopsis } = httpRequest.body;
+                yield this.updateMovieById.update(movie_id, {
                     gender,
                     name,
                     duration,
                     classification,
-                    releaseDate,
+                    release_date,
                     synopsis
                 });
                 return (0, http_helper_1.noContent)();

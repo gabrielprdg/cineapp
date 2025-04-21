@@ -1,9 +1,9 @@
 import { SessionModel } from '../models/session'
 
 export type SessionParams = {
-  movieId?: string
-  cinemaId?: string
-  dayOfWeek?: string
+  movie_id?: string
+  cinema_id?: string
+  day_of_week?: string
   date?: Date
 }
 

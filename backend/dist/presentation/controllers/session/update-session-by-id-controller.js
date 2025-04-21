@@ -19,11 +19,11 @@ class UpdateSessionByIdController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = httpRequest.params;
-                const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body;
+                const { movie_id, cinema_id, day_of_week, date } = httpRequest.body;
                 yield this.updateSessionById.update(id, {
-                    movieId,
-                    cinemaId,
-                    dayOfWeek,
+                    movie_id,
+                    cinema_id,
+                    day_of_week,
                     date
                 });
                 return (0, http_helper_1.noContent)();

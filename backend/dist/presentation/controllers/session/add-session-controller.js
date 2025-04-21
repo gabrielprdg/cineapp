@@ -23,19 +23,18 @@ class AddSessionController {
                 if (error) {
                     return (0, http_helper_1.badRequest)(error);
                 }
-                const { movieId, cinemaId, dayOfWeek, date } = httpRequest.body;
+                const { movie_id, cinema_id, day_of_week, date } = httpRequest.body;
                 const parsedDate = new Date(date);
                 const localDate = new Date(parsedDate.getTime() + (3 * 60 * 60 * 1000));
                 yield this.addSession.add({
-                    movieId,
-                    cinemaId,
-                    dayOfWeek,
+                    movie_id,
+                    cinema_id,
+                    day_of_week,
                     date: localDate
                 });
                 return (0, http_helper_1.noContent)();
             }
             catch (err) {
-                console.log('eeeeee', err);
                 return (0, http_helper_1.serverError)(err);
             }
         });

@@ -23,13 +23,13 @@ class AddMovieController {
                 if (error) {
                     return (0, http_helper_1.badRequest)(error);
                 }
-                const { gender, name, duration, classification, releaseDate, synopsis } = httpRequest.body;
+                const { gender, name, duration, classification, release_date, synopsis } = httpRequest.body;
                 yield this.addMovie.add({
                     gender,
                     name,
                     duration,
                     classification,
-                    releaseDate,
+                    release_date,
                     synopsis
                 });
                 return (0, http_helper_1.noContent)();
