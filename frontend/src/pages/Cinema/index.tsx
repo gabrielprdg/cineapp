@@ -44,6 +44,7 @@ export default function Cinema() {
     try {
       await api.delete(`/cinema/${selectedCinemaId}`);
       setCinemas(prev => prev.filter(c => c.id !== selectedCinemaId));
+      toast.success("Cinema deletado com sucesso!");
     } catch (error) {
       toast.error("Erro ao deletar cinema");
     } finally {
@@ -62,7 +63,7 @@ export default function Cinema() {
         <h1 className="text-4xl font-semibold text-gray-800">Cinemas</h1>
         <button
           onClick={handleCreateCinema}
-          className="mr-12 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="create-cinema px-4 cursor-pointer py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           +
         </button>

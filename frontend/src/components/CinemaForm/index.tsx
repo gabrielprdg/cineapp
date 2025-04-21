@@ -66,14 +66,14 @@ export default function CinemaForm() {
           </div>
         ))}
 
-        <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-md">
+        <button type="submit" className="w-full cursor-pointer py-3 bg-blue-500 text-white rounded-md">
           {isEdit ? "Atualizar" : "Cadastrar"}
         </button>
 
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="mt-4 w-full py-3 bg-red-500 text-white rounded-md"
+          className="mt-4 cursor-pointer w-full py-3 bg-red-500 text-white rounded-md"
         >
           Voltar
         </button>

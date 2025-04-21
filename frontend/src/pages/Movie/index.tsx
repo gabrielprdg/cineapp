@@ -46,9 +46,11 @@ export default function Movie() {
     if (!selectedMovieId) return;
     try {
       await api.delete(`/movie/${selectedMovieId}`);
+      // filtragem com filmes existentes
       setMovies(prev => prev.filter(m => m.id !== selectedMovieId));
+      toast.success("Filme deletado com sucesso!");
     } catch (error) {
-      toast.error("Erro ao deletar filme");
+      toast.error("Erro ao deletar filme, possívelmente vinculado a uma sessão");
     } finally {
       setShowModal(false);
       setSelectedMovieId(null);
@@ -61,7 +63,7 @@ export default function Movie() {
         <h1 className="m-12 text-4xl font-semibold text-gray-800">Filmes</h1>
         <button
           onClick={handleCreateMovie}
-          className="mr-12 px-4 py-2 cursor-pointer bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="mr-12 px-4 cursor-pointer py-2 cursor-pointer bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           +
         </button>

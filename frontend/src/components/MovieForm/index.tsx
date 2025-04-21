@@ -60,7 +60,7 @@ export default function MovieForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4">
+    <div className="max-w-xl mt-12 mx-auto p-4">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         {isEdit ? "Editar Filme" : "Cadastrar Filme"}
       </h2>
@@ -143,7 +143,7 @@ export default function MovieForm() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="mt-4 w-full cursor-pointer py-3 bg-red-500 text-white rounded-md"
+          className="mt-4 cursor-pointer w-full cursor-pointer py-3 bg-red-500 text-white rounded-md"
         >
           Voltar
         </button>

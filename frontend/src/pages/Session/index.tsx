@@ -45,6 +45,7 @@ export default function Session() {
     try {
       await api.delete(`/session/${selectedSessionId}`);
       setSessions(prev => prev.filter(s => s.id !== selectedSessionId));
+      toast.success("Sessão deletada com sucesso!");
     } catch (error) {
       toast.error("Erro ao deletar sessão");
     } finally {

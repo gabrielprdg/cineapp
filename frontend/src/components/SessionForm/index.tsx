@@ -15,7 +15,7 @@ export default function SessionForm() {
     movie_id: "",
     cinema_id: "",
     day_of_week: "",
-    date: "", // formato "HH:mm"
+    date: "",
   });
 
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -57,7 +57,6 @@ export default function SessionForm() {
     e.preventDefault();
 
     try {
-      // Converter "HH:mm" para ISO string
       const [hour, minute] = formData.date.split(":").map(Number);
       const now = new Date();
       const dateWithTime = new Date(
@@ -92,7 +91,7 @@ export default function SessionForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4">
+    <div className="mt-12 max-w-xl mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">{isEdit ? "Editar Sessão" : "Cadastrar Sessão"}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -156,14 +155,14 @@ export default function SessionForm() {
           />
         </div>
 
-        <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-md">
+        <button type="submit" className="w-full cursor-pointer py-3 bg-blue-500 text-white rounded-md">
           {isEdit ? "Atualizar" : "Cadastrar"}
         </button>
 
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="mt-4 w-full py-3 bg-red-500 text-white rounded-md"
+          className="mt-4 cursor-pointer w-full py-3 bg-red-500 text-white rounded-md"
         >
           Voltar
         </button>
