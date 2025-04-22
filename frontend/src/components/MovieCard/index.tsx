@@ -1,5 +1,3 @@
-// src/components/MovieCard.tsx
-
 interface MovieCardProps {
   title: string;
   description: string;
